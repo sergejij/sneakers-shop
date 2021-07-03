@@ -1,0 +1,145 @@
+.overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+
+  .cart {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    position: absolute;
+    width: 420px;
+    height: 100%;
+    right: 0;
+    background: #ffffff;
+    box-shadow: -10px 4px 24px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    & > div > img {
+
+      cursor: pointer;
+    }
+    .cartSneakers {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      overflow: auto;
+      flex: 1;
+      margin: 30px 0;
+
+
+
+      .cartItem {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        width: 325px;
+        height: 119px;
+        padding: 20px;
+        border: 1px solid #F3F3F3;
+        border-radius: 20px;
+        margin-bottom: 15px;
+
+        .cartPhotoContainer {
+          width: 70px;
+          height: 70px;
+          margin-right: 10px;
+
+          img {
+            max-width: 68px;
+            max-height: 70px;
+          }
+        }
+
+        button {
+          background-color: transparent;
+          width: 32px;
+          height: 32px;
+          border-radius: 8px;
+          border: 1px solid #dbdbdb;
+          transition: background 0.2s ease-in-out;
+
+          &:hover {
+            background-color: darken(#fff, 3%);
+          }
+        }
+      }
+
+      .cartItemInfo {
+        display: flex;
+        flex-direction: column;
+        width: 150px;
+
+        p {
+          text-align: left;
+          font-size: 0.875rem;
+          line-height: 1.0625rem;
+          padding: 0;
+        }
+
+        b {
+          text-align: left;
+          font-size: 0.875rem;
+          line-height: 1.0625rem;
+        }
+      }
+    }
+
+    .cartTotal {
+      display: block;
+
+      ul {
+        margin: 0;
+        padding: 0;
+
+        li {
+          display: flex;
+          align-items: flex-end;
+          margin-bottom: 20px;
+
+          div {
+            flex:1;
+            border-bottom: 1px dashed #DFDFDF;
+            height: 1px;
+            position: relative;
+            top: -4px;
+            margin: 0 7px;
+          }
+        }
+      }
+      .cartBtn {
+        position: relative;
+        width: 325px;
+        height: 55px;
+        background-color: #9DD558;
+        border-radius: 18px;
+        border: none;
+        color: #fff;
+        font-weight: 600;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+        font-size: 1rem;
+
+        img {
+          position: absolute;
+          right: 33px;
+          top: 21px;
+          transition: all 0.2s ease-in-out;
+        }
+
+        &:hover {
+          img {
+            right: 28px;
+          }
+        }
+      }
+    }
+  }
+}

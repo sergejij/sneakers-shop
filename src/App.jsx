@@ -64,9 +64,7 @@ function App() {
       <div className="App p-50">
         <div className="content">
           {isOpenedCart && (
-            <Cart
-              onClose={() => setIsOpenedCart(false)}
-            />
+            <Cart onClose={() => setIsOpenedCart(false)} />
           )}
           <Header onOpenCart={() => setIsOpenedCart(true)} />
 

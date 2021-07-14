@@ -1,13 +1,27 @@
 .overlay {
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 999;
+  z-index: 1;
+  transition: opacity 0.1s ease-out, visibility 0.1s ease-out;
+  overflow: hidden;
+
 
   .cart {
+    @keyframes cart {
+      0% {
+        transform: scale(0.5);
+        transform-origin: 100% 50%;
+      }
+      100% {
+        transform: scale(1);
+        transform-origin: 100% 50%;
+      }
+    }
+
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -19,9 +33,16 @@
     background: #ffffff;
     box-shadow: -10px 4px 24px rgba(0, 0, 0, 0.1);
     padding: 30px;
+    overflow: hidden;
+
+    transition: all 2s ease-in-out;
+
+    -webkit-animation: scale-up-right 0.9s cubic-bezier(0.550, 0.055, 0.675, 0.190) 0 both;
+    animation: scale-up-right 0.9s cubic-bezier(0.550, 0.055, 0.675, 0.190) 0 both;
+
     & > div > img {
 
-      cursor: pointer;
+      //cursor: pointer;
     }
     .cartSneakers {
       display: flex;
@@ -94,7 +115,7 @@
     .cartTotal {
       display: block;
 
-      ul {
+      & > ul {
         margin: 0;
         padding: 0;
 
@@ -113,33 +134,7 @@
           }
         }
       }
-      .cartBtn {
-        position: relative;
-        width: 325px;
-        height: 55px;
-        background-color: #9DD558;
-        border-radius: 18px;
-        border: none;
-        color: #fff;
-        font-weight: 600;
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-        sans-serif;
-        font-size: 1rem;
-
-        img {
-          position: absolute;
-          right: 33px;
-          top: 21px;
-          transition: all 0.2s ease-in-out;
-        }
-
-        &:hover {
-          img {
-            right: 28px;
-          }
-        }
-      }
     }
   }
 }
+

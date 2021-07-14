@@ -6,18 +6,29 @@ const Card = ({
   name,
   price,
   photoUrl,
-  addToCart
+  addToCart,
+  removeFromCart,
+  addToFavorite,
+  removeFromFavorite,
+  favorited = false,
+  added = false,
 }) => {
-  const [isAdded, setIsAdded] = React.useState(false);
-  const [isWished, setIsWished] = React.useState(false);
+  const [isAdded, setIsAdded] = React.useState(added);
+  const [isWished, setIsWished] = React.useState(favorited);
 
-  const onClickPlus = () => {
-    setIsAdded((state) => !state);
-    addToCart();
-  };
+  // const onClickPlus = () => {
+  //   setIsAdded((state) => !state);
+  //   addToCart();
+  // };
 
   const onClickHeart = () => {
+    isWished ? removeFromFavorite() : addToFavorite();
     setIsWished((state) => !state);
+  };
+
+  const onClickPlus = () => {
+    isAdded ? removeFromCart() : addToCart();
+    setIsAdded((state) => !state);
   };
 
   return (

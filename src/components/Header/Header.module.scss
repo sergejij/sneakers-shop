@@ -7,6 +7,9 @@
   height: 128px;
   border-bottom: 1px solid #EAEAEA;
 
+  a {
+    text-decoration: none;
+  }
   .headerLeft {
     display: flex;
     justify-content: space-between;
@@ -44,6 +47,7 @@
       line-height: 1.5rem;
       text-align: left;
       margin: 0;
+      color: #000;
     }
 
     span {

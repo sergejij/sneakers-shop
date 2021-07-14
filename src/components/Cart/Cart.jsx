@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './Cart.module.scss';
 
 const Cart = ({ onClose, items = [], removeFromCart }) => {
+  console.log('items:', items);
   return (
     <div className={styles.overlay}>
       <div className={styles.cart}>
@@ -11,18 +12,18 @@ const Cart = ({ onClose, items = [], removeFromCart }) => {
         </div>
         <div className={styles.cartSneakers}>
           {items.map((item, index) => (
-              <div key={`${item.name}_${index}`} className={styles.cartItem}>
-                <div className={styles.cartPhotoContainer}>
-                  <img src={item.photoUrl} alt="sneaker" />
-                </div>
-                <div className={styles.cartItemInfo}>
-                  <p>{item.name}</p>
-                  <b>{item.price}</b>
-                </div>
-                <button onClick={() => removeFromCart(item)} className="d-flex align-center justify-center">
-                  <img src="/img/close.png" alt="close" />
-                </button>
+            <div key={`${item.name}_${index}`} className={styles.cartItem}>
+              <div className={styles.cartPhotoContainer}>
+                <img src={item.photoUrl} alt="sneaker" />
               </div>
+              <div className={styles.cartItemInfo}>
+                <p>{item.name}</p>
+                <b>{item.price}</b>
+              </div>
+              <button onClick={() => removeFromCart(item)} className="d-flex align-center justify-center">
+                <img src="/img/close.png" alt="close" />
+              </button>
+            </div>
           ))}
         </div>
         <div className={styles.cartTotal}>

@@ -1,6 +1,7 @@
 import React from 'react';
 import Card from '../Card/Card';
 import styles from './Sneakers.module.scss';
+import AppContext from '../../context';
 
 // const sneakersData = [
 //   {
@@ -152,10 +153,11 @@ import styles from './Sneakers.module.scss';
 //     },
 // ]
 
-const Sneakers = ({
-  items, addToCart, removeFromCart, addToFavorite, removeFromFavorite,
-}) => {
+const Sneakers = () => {
   const [searchText, setSearchText] = React.useState('');
+  const {
+    sneakers, addToCart, addToFavorite, removeFromCart, removeFromFavorite,
+  } = React.useContext(AppContext);
 
   return (
     <>
@@ -169,23 +171,16 @@ const Sneakers = ({
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
           />
+          {searchText && <img onClick={() => setSearchText('')} src="/img/close.png" alt="close" />}
         </label>
       </div>
       <div className="d-flex justify-center flex-wrap align-center">
-        {items
+        {sneakers
           .filter((sneaker) => sneaker.name.toLowerCase().includes(searchText.toLowerCase()))
-          .map((sneaker, index) => (
+          .map((sneaker) => (
             <Card
-              key={`${sneaker.name}_${index}`}
-              name={sneaker.name}
-              price={sneaker.price}
-              photoUrl={sneaker.photoUrl}
-              addToCart={() => addToCart(sneaker)}
-              removeFromCart={() => removeFromCart(sneaker)}
-              addToFavorite={() => addToFavorite(sneaker)}
-              removeFromFavorite={() => removeFromFavorite(sneaker)}
-              added={sneaker.isAdded}
-              favorited={sneaker.isFavorited}
+              key={sneaker.id}
+              sneaker={sneaker}
             />
           ))}
       </div>

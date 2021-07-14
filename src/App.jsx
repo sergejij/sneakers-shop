@@ -12,6 +12,8 @@ import Sneakers from './components/Sneakers/Sneakers';
 import Favorite from './pages/Favorite/Favorite';
 import api from './consts';
 
+import AppContext from './context';
+
 function App() {
   const [sneakers, setSneakers] = React.useState([]);
   const [isOpenedCart, setIsOpenedCart] = React.useState(false);
@@ -55,40 +57,32 @@ function App() {
   };
 
   return (
-    <div className="App p-50">
-      <div className="content">
-        {isOpenedCart && (
-        <Cart
-          items={sneakers.filter((sneaker) => sneaker.isAdded)}
-          onClose={() => setIsOpenedCart(false)}
-          removeFromCart={removeFromCart}
-        />
-        )}
-        <Header onOpenCart={() => setIsOpenedCart(true)} />
+    <AppContext.Provider value={{
+      sneakers, addToCart, addToFavorite, removeFromCart, removeFromFavorite,
+    }}
+    >
+      <div className="App p-50">
+        <div className="content">
+          {isOpenedCart && (
+            <Cart
+              onClose={() => setIsOpenedCart(false)}
+            />
+          )}
+          <Header onOpenCart={() => setIsOpenedCart(true)} />
 
-        <main className="p-50">
-          <Switch>
-            <Route path="/" exact>
-              <Sneakers
-                items={sneakers}
-                addToCart={addToCart}
-                removeFromCart={removeFromCart}
-                addToFavorite={addToFavorite}
-                removeFromFavorite={removeFromFavorite}
-              />
-            </Route>
-            <Route path="/favorite">
-              <Favorite
-                removeFromFavorite={removeFromFavorite}
-                addToFavorite={addToFavorite}
-                addToCart={addToCart}
-                items={sneakers.filter((sneaker) => sneaker.isFavorited)}
-              />
-            </Route>
-          </Switch>
-        </main>
+          <main className="p-50">
+            <Switch>
+              <Route path="/" exact>
+                <Sneakers />
+              </Route>
+              <Route path="/favorite">
+                <Favorite />
+              </Route>
+            </Switch>
+          </main>
+        </div>
       </div>
-    </div>
+    </AppContext.Provider>
   );
 }
 

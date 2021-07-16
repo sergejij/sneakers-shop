@@ -4,7 +4,7 @@ import AppContext from '../../context';
 import CartInfo from './CartInfo';
 
 const Cart = ({ onClose }) => {
-  const { sneakers, removeFromCart } = React.useContext(AppContext);
+  const { sneakers, removeFromCart, cartSum, placeOrder, isOrderPlaced } = React.useContext(AppContext);
   const items = sneakers.filter((sneaker) => sneaker.isAdded);
 
   return (
@@ -27,7 +27,7 @@ const Cart = ({ onClose }) => {
                     <p>{item.name}</p>
                     <b>{item.price}</b>
                   </div>
-                  <button onClick={() => removeFromCart(item)} className="d-flex align-center justify-center">
+                  <button type="button" onClick={() => removeFromCart(item)} className="d-flex align-center justify-center">
                     <img src="/img/close.png" alt="close" />
                   </button>
                 </div>
@@ -38,22 +38,22 @@ const Cart = ({ onClose }) => {
                 <li>
                   <span>Итого:</span>
                   <div />
-                  <b>1 498 руб.</b>
+                  <b>{cartSum} руб.</b>
                 </li>
                 <li>
                   <span>Налог 5%:</span>
                   <div />
-                  <b>1074 руб. </b>
+                  <b>{Math.round(cartSum * 0.05)} руб. </b>
                 </li>
               </ul>
 
-              <button className="cartBtnRight">
+              <button type="button" onClick={() => placeOrder(items)} className="cartBtnRight">
                 Оформить заказ
                 <img className="arrowBtnRight" src="/img/arrow-right.png" alt="arrow-right" />
               </button>
             </div>
           </>
-        ) : <CartInfo onClose={onClose} isCartEmpty />}
+        ) : <CartInfo onClose={onClose} isOrderPlaced={isOrderPlaced} />}
       </div>
     </div>
   );

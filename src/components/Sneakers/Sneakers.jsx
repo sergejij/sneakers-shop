@@ -81,77 +81,113 @@ import SkeletonCard from "../SkeletonCard/SkeletonCard";
 
 // [
 //     {
-//         "id": 1,
+//         "id": "1",
 //         "name": "Мужские Кроссовки Nike Blazer Mid Suede",
-//         "price": "12 999 руб.",
-//         "photoUrl": "/img/sneakers/1.png"
+//         "price": 12999,
+//         "photoUrl": "/img/sneakers/1.png",
+//         "isAdded": true,
+//         "isFavorited": false,
+//         "isBought": false
 //     },
 //     {
-//         "id": 2,
+//         "id": "2",
 //         "name": "Мужские Кроссовки Nike Air Max 270",
-//         "price": "12 999 руб.",
-//         "photoUrl": "/img/sneakers/2.png"
+//         "price": 12999,
+//         "photoUrl": "/img/sneakers/2.png",
+//         "isAdded": false,
+//         "isFavorited": false,
+//         "isBought": false
 //     },
 //     {
-//         "id": 3,
+//         "id": "3",
 //         "name": "Мужские Кроссовки Nike Blazer Mid Suede",
-//         "price": "8 499 руб.",
-//         "photoUrl": "/img/sneakers/3.png"
+//         "price": 8499,
+//         "photoUrl": "/img/sneakers/3.png",
+//         "isAdded": true,
+//         "isFavorited": true,
+//         "isBought": false
 //     },
 //     {
-//         "id": 4,
+//         "id": "4",
 //         "name": "Кроссовки Puma X Aka Boku Future Rider",
-//         "price": "8 999 руб.",
-//         "photoUrl": "/img/sneakers/4.png"
+//         "price": 8999,
+//         "photoUrl": "/img/sneakers/4.png",
+//         "isAdded": false,
+//         "isFavorited": true,
+//         "isBought": false
 //     },
 //     {
-//         "id": 5,
+//         "id": "5",
 //         "name": "Мужские Кроссовки Under Armour Curry 8",
-//         "price": "15 199 руб.",
-//         "photoUrl": "/img/sneakers/5.png"
+//         "price": 15199,
+//         "photoUrl": "/img/sneakers/5.png",
+//         "isAdded": false,
+//         "isFavorited": false,
+//         "isBought": false
 //     },
 //     {
-//         "id": 6,
+//         "id": "6",
 //         "name": "Мужские Кроссовки Nike Kyrie 7",
-//         "price": "11 299 руб.",
-//         "photoUrl": "/img/sneakers/6.png"
+//         "price": 11299,
+//         "photoUrl": "/img/sneakers/6.png",
+//         "isAdded": false,
+//         "isFavorited": false,
+//         "isBought": false
 //     },
 //     {
-//         "id": 7,
+//         "id": "7",
 //         "name": "Мужские Кроссовки Jordan Air Jordan 11",
-//         "price": "10 799 руб.",
-//         "photoUrl": "/img/sneakers/7.png"
+//         "price": 10799,
+//         "photoUrl": "/img/sneakers/7.png",
+//         "isAdded": false,
+//         "isFavorited": false,
+//         "isBought": true
 //     },
 //     {
-//         "id": 8,
+//         "id": "8",
 //         "name": "Мужские Кроссовки Nike LeBron XVIII",
-//         "price": "16 499 руб.",
-//         "photoUrl": "/img/sneakers/8.png"
+//         "price": 16499,
+//         "photoUrl": "/img/sneakers/8.png",
+//         "isAdded": true,
+//         "isFavorited": false,
+//         "isBought": false
 //     },
 //     {
-//         "id": 9,
+//         "id": "9",
 //         "name": "Мужские Кроссовки Nike Lebron XVIII Low",
-//         "price": "13 999 руб.",
-//         "photoUrl": "/img/sneakers/9.png"
+//         "price": 13999,
+//         "photoUrl": "/img/sneakers/9.png",
+//         "isAdded": false,
+//         "isFavorited": false,
+//         "isBought": false
 //     },
 //     {
-//         "id": 10,
+//         "id": "10",
 //         "name": "Мужские Кроссовки Nike Blazer Mid Suede",
-//         "price": "8 499 руб.",
-//         "photoUrl": "/img/sneakers/10.png"
+//         "price": 8499,
+//         "photoUrl": "/img/sneakers/10.png",
+//         "isAdded": false,
+//         "isFavorited": false,
+//         "isBought": false
 //     },
 //     {
-//         "id": 11,
+//         "id": "11",
 //         "name": "Кроссовки Puma X Aka Boku Future Rider",
-//         "price": "8 999 руб.",
-//         "photoUrl": "/img/sneakers/11.png"
+//         "price": 8999,
+//         "photoUrl": "/img/sneakers/11.png",
+//         "isAdded": false,
+//         "isFavorited": false,
+//         "isBought": false
 //     },
 //     {
-//         "id": 12,
+//         "id": "12",
 //         "name": "Мужские Кроссовки Nike Kyrie Flytrap IV",
-//         "price": "11 299 руб.",
-//         "photoUrl": "/img/sneakers/12.png"
-//     },
+//         "price": 11299,
+//         "photoUrl": "/img/sneakers/12.png",
+//         "isAdded": false,
+//         "isFavorited": false,
+//         "isBought": false
+//     }
 // ]
 
 const Sneakers = () => {
@@ -160,7 +196,6 @@ const Sneakers = () => {
     sneakers, isLoading,
   } = React.useContext(AppContext);
 
-  console.log("araaa:", [...Array(12)].map(() => <SkeletonCard />));
   return (
     <>
       <div className={styles.headlineRow}>
@@ -178,7 +213,7 @@ const Sneakers = () => {
       </div>
       <div className="d-flex justify-center flex-wrap align-center">
         {isLoading
-          ? [...Array(12)].map(() => <SkeletonCard />)
+          ? [...Array(12)].map((_, index) => <SkeletonCard key={index} />)
           : sneakers
             .filter((sneaker) => sneaker.name.toLowerCase().includes(searchText.toLowerCase()))
             .map((sneaker) => (

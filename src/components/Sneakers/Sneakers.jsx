@@ -2,6 +2,7 @@ import React from 'react';
 import Card from '../Card/Card';
 import styles from './Sneakers.module.scss';
 import AppContext from '../../context';
+import SkeletonCard from "../SkeletonCard/SkeletonCard";
 
 // const sneakersData = [
 //   {
@@ -156,9 +157,10 @@ import AppContext from '../../context';
 const Sneakers = () => {
   const [searchText, setSearchText] = React.useState('');
   const {
-    sneakers, addToCart, addToFavorite, removeFromCart, removeFromFavorite,
+    sneakers, isLoading,
   } = React.useContext(AppContext);
 
+  console.log("araaa:", [...Array(12)].map(() => <SkeletonCard />));
   return (
     <>
       <div className={styles.headlineRow}>
@@ -175,14 +177,16 @@ const Sneakers = () => {
         </label>
       </div>
       <div className="d-flex justify-center flex-wrap align-center">
-        {sneakers
-          .filter((sneaker) => sneaker.name.toLowerCase().includes(searchText.toLowerCase()))
-          .map((sneaker) => (
-            <Card
-              key={sneaker.id}
-              sneaker={sneaker}
-            />
-          ))}
+        {isLoading
+          ? [...Array(12)].map(() => <SkeletonCard />)
+          : sneakers
+            .filter((sneaker) => sneaker.name.toLowerCase().includes(searchText.toLowerCase()))
+            .map((sneaker) => (
+              <Card
+                key={sneaker.id}
+                sneaker={sneaker}
+              />
+            ))}
       </div>
     </>
   );

@@ -17,11 +17,16 @@ import AppContext from './context';
 function App() {
   const [sneakers, setSneakers] = React.useState([]);
   const [isOpenedCart, setIsOpenedCart] = React.useState(false);
+  const  [isLoading, setIsLoading] = React.useState(false);
 
   React.useEffect(() => {
+    setIsLoading(true);
     axios
       .get(api.items)
-      .then(({ data }) => setSneakers(data));
+      .then(({ data }) => {
+        setSneakers(data);
+        setIsLoading(false);
+      });
   }, []);
 
   const addToCart = (sneaker) => {
@@ -58,7 +63,7 @@ function App() {
 
   return (
     <AppContext.Provider value={{
-      sneakers, addToCart, addToFavorite, removeFromCart, removeFromFavorite,
+      sneakers, addToCart, addToFavorite, removeFromCart, removeFromFavorite, isLoading
     }}
     >
       <div className="App p-50">

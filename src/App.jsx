@@ -148,13 +148,13 @@ function App() {
 
           <main className="p-50">
             <Switch>
-              <Route path="/" exact>
+              <Route path="/sneakers-shop" exact>
                 <Sneakers />
               </Route>
-              <Route path="/favorite" exact>
+              <Route path="/sneakers-shop/favorite" exact>
                 <Favorite />
               </Route>
-              <Route path="/orders" exact>
+              <Route path="/sneakers-shop/orders" exact>
                 <Orders />
               </Route>
             </Switch>

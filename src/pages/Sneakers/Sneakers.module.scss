@@ -5,18 +5,11 @@
   padding-bottom: 40px;
 
   @media (max-width: 900px) {
-    flex-direction: column;
+    flex-direction: column !important;
     .search {
       margin-top: 10px;
     }
   }
-
-  //@media (max-width: 500px) {
-  //  flex-direction: column !important;
-  //  .search {
-  //    margin-top: 10px;
-  //  }
-  //}
 
   .search {
     display: flex;
@@ -39,22 +32,5 @@
         color: #C4C4C4;
       }
     }
-  }
-}
-
-.clearOrder {
-  border: none;
-  background: none;
-  transition: all 0.2s ease-in-out;
-
-  @media (max-width: 900px) {
-    margin-top: 30px;
-  }
-
-  &:not([disabled]):hover {
-    opacity: 0.8;
-  }
-  &:not([disabled]):active {
-    opacity: 0.6;
   }
 }

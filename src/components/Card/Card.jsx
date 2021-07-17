@@ -30,11 +30,11 @@ const Card = ({ sneaker }) => {
     <div className={styles.card}>
       {isWished ? (
         <button onClick={onClickHeart} type="button" className={styles.heartRed}>
-          <img src="/img/heartRed.png" alt="heart" />
+          <img src="img/heartRed.png" alt="heart" />
         </button>
       ) : (
         <button onClick={onClickHeart} type="button" className={styles.heart}>
-          <img src="/img/heart.png" alt="heart" />
+          <img src="img/heart.png" alt="heart" />
         </button>
       )}
       <img width={133} height={112} src={sneaker.photoUrl} alt="sneaker" />
@@ -46,12 +46,12 @@ const Card = ({ sneaker }) => {
         </div>
         {isAdded ? (
           <button onClick={onClickPlus} type="button" className={styles.addedButton}>
-            <img src="/img/check.png" alt="check" />
+            <img src="img/check.png" alt="check" />
           </button>
 
         ) : (
           <button onClick={onClickPlus} type="button" className={styles.addButton}>
-            <img src="/img/plus.png" alt="plus" />
+            <img src="img/plus.png" alt="plus" />
           </button>
         )}
       </div>

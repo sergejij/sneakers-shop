@@ -39,6 +39,11 @@ h5 {
 
 .App {
   text-align: center;
+  padding: 50px;
+
+  @media (max-width: 500px) {
+    padding: 0;
+  }
 }
 
 .content {
@@ -47,6 +52,11 @@ h5 {
   width: 90%;
   max-width: 1080px;
   border-radius: 20px;
+
+  @media (max-width: 500px) {
+    width: 100%;
+    border-radius: 0;
+  }
 }
 
 
@@ -76,6 +86,10 @@ h5 {
       right: 28px;
     }
   }
+
+  &:disabled {
+    background-color: #9D9D9D;
+  }
 }
 
 .cartBtnLeft {
@@ -91,6 +105,10 @@ h5 {
   'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
   sans-serif;
   font-size: 1rem;
+
+  @media (max-width: 400px) {
+    width: 250px;
+  }
 
   img {
     position: absolute;

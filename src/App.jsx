@@ -8,12 +8,14 @@ import {
 } from 'react-router-dom';
 import Cart from './components/Cart/Cart';
 import Header from './components/Header/Header';
-import Sneakers from './components/Sneakers/Sneakers';
+import Sneakers from './pages/Sneakers/Sneakers';
 import Favorite from './pages/Favorite/Favorite';
 import api from './consts';
 
 import AppContext from './context';
 import Orders from './pages/Orders/Orders';
+
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 function App() {
   const [sneakers, setSneakers] = React.useState([]);
@@ -28,56 +30,95 @@ function App() {
       .get(api.items)
       .then(({ data }) => {
         setSneakers(data);
-        setCartSum(() => data.reduce((acc, sneaker) => (sneaker.isAdded ? acc + sneaker.price : acc), 0));
+        setCartSum(() => data.reduce((acc, sneaker) => (
+          (sneaker.isAdded ? acc + sneaker.price : acc)
+        ), 0));
         setIsLoading(false);
       });
   }, []);
 
   const addToCart = (sneaker) => {
-    axios.put(`${api.items}/${sneaker.id}`, { isAdded: true });
-    setSneakers((prev) => prev.map((item) => (item.id === sneaker.id ? {
-      ...item,
-      isAdded: true,
-    } : item)));
-    setCartSum((prev) => prev + sneaker.price);
+    axios.put(`${api.items}/${sneaker.id}`, { isAdded: true })
+      .then(() => {
+        setSneakers((prev) => prev.map((item) => (item.id === sneaker.id ? {
+          ...item,
+          isAdded: true,
+        } : item)));
+        setCartSum((prev) => prev + sneaker.price);
+      })
+      .catch(() => alert('Не удалось добавить в корзину ;('));
   };
 
   const addToFavorite = (sneaker) => {
-    axios.put(`${api.items}/${sneaker.id}`, { isFavorited: true });
-    setSneakers((prev) => prev.map((item) => (item.id === sneaker.id ? {
-      ...item,
-      isFavorited: true,
-    } : item)));
+    axios.put(`${api.items}/${sneaker.id}`, { isFavorited: true })
+      .then(() => {
+        setSneakers((prev) => prev.map((item) => (item.id === sneaker.id ? {
+          ...item,
+          isFavorited: true,
+        } : item)));
+      })
+      .catch(() => alert('Не удалось добавить в фавориты ;('));
   };
 
   const removeFromCart = (sneaker) => {
-    axios.put(`${api.items}/${sneaker.id}`, { isAdded: false });
-    setSneakers((prev) => prev.map((item) => (item.id === sneaker.id ? {
-      ...item,
-      isAdded: false,
-    } : item)));
-    setCartSum((prev) => prev - sneaker.price);
+    axios.put(`${api.items}/${sneaker.id}`, { isAdded: false })
+      .then(() => {
+        setSneakers((prev) => prev.map((item) => (item.id === sneaker.id ? {
+          ...item,
+          isAdded: false,
+        } : item)));
+        setCartSum((prev) => prev - sneaker.price);
+      })
+      .catch(() => alert('Не убрать товар из корзины ;('));
   };
 
   const removeFromFavorite = (sneaker) => {
-    axios.put(`${api.items}/${sneaker.id}`, { isFavorited: false });
-    setSneakers((prev) => prev.map((item) => (item.id === sneaker.id ? {
-      ...item,
-      isFavorited: false,
-    } : item)));
+    axios.put(`${api.items}/${sneaker.id}`, { isFavorited: false })
+      .then(() => {
+        setSneakers((prev) => prev.map((item) => (item.id === sneaker.id ? {
+          ...item,
+          isFavorited: false,
+        } : item)));
+      })
+      .catch(() => alert('Не убрать товар из фаворитов ;('));
   };
 
-  const placeOrder = (placedSneakers) => {
-    placedSneakers.forEach((placedSneaker) => {
-      axios.put(`${api.items}/${placedSneaker.id}`, { isBought: true, isAdded: false });
-      setSneakers((prev) => prev.map((sneaker) => (sneaker === placedSneaker ? {
-        ...sneaker,
-        isBought: true,
-        isAdded: false,
-      } : sneaker)));
-    });
+  const placeOrder = async (placedSneakers) => {
+    try {
+      for (let i = 0; i < placedSneakers.length; i += 1) {
+        const placedSneaker = placedSneakers[i];
+
+        await axios.put(`${api.items}/${placedSneaker.id}`, { isBought: true, isAdded: false });
+        setSneakers((prev) => prev.map((sneaker) => (sneaker === placedSneaker ? {
+          ...sneaker,
+          isBought: true,
+          isAdded: false,
+        } : sneaker)));
+        delay(300);
+      }
+    } catch {
+      alert('Не удалось оформить зака ;(');
+    }
+
     setCartSum(0);
     setIsOrderPlaced(true);
+  };
+
+  const clearOrders = async (orders) => {
+    try {
+      for (let i = 0; i < orders.length; i += 1) {
+        const order = orders[i];
+
+        await axios.put(`${api.items}/${order.id}`, { isBought: false });
+        setSneakers((prev) => prev.map((sneaker) => (sneaker === order ? {
+          ...sneaker,
+          isBought: false,
+        } : sneaker)));
+        delay(300);
+      }
+    } catch {
+      alert('Не удалось очистить покупки ;(');
+    }
   };
 
   return (
@@ -91,16 +132,18 @@ function App() {
       cartSum,
       placeOrder,
       isOrderPlaced,
+      clearOrders,
     }}
     >
-      <div className="App p-50">
+      <div className="App">
         <div className="content">
-          {isOpenedCart && (
-            <Cart onClose={() => {
+          <Cart
+            isOpenedCart={isOpenedCart}
+            onClose={() => {
               setIsOpenedCart(false);
               setIsOrderPlaced(false);
-            }} />
-          )}
+            }}
+          />
           <Header onOpenCart={() => setIsOpenedCart(true)} />
 
           <main className="p-50">

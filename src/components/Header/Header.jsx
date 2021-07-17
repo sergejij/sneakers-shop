@@ -8,7 +8,7 @@ const Header = ({ onOpenCart }) => {
 
   return (
     <header className={styles.header}>
-      <Link to="/sneakers-shop">
+      <Link to="/sneakers-shop/">
         <div className={styles.headerLeft}>
           <img width="45" height="45" src="img/logo.png" alt="" />
           <div className={styles.headlines}>

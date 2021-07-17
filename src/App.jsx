@@ -148,7 +148,7 @@ function App() {
 
           <main className="p-50">
             <Switch>
-              <Route path="/sneakers-shop" exact>
+              <Route path="/sneakers-shop/" exact>
                 <Sneakers />
               </Route>
               <Route path="/sneakers-shop/favorite" exact>

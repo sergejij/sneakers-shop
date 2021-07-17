@@ -31,7 +31,7 @@ const Favorite = () => {
             />
             <h4>Закладок нет :(</h4>
             <p style={{ marginBottom: '50px' }}>Вы ничего не добавляли в закладки</p>
-            <Link width="100%" to="/sneakers-shop">
+            <Link width="100%" to="/sneakers-shop/">
               <button type="button" className="cartBtnLeft">
                 <img src="img/arrow-left.png" alt="arrow-left" />
                 Вернуться назад

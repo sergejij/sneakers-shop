@@ -48,7 +48,7 @@ const Orders = () => {
               <br />
               Оформите хотя бы один заказ.
             </p>
-            <Link to="/">
+            <Link to="/sneakers-shop">
               <button type="button" className="cartBtnLeft">
                 <img src="img/arrow-left.png" alt="arrow-left" />
                 Вернуться назад

@@ -1,4 +1,4 @@
-###Интернет-магазин кроссовок - React Sneakers
+### Интернет-магазин кроссовок - React Sneakers
 
 https://sergejij.github.io/sneakers-shop/
 
